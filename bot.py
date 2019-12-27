@@ -21,7 +21,7 @@ async def createProfile(ctx):
         "LastRedeemedMonthly": 99999999999999
     }
     with open("profiles/" + str(ctx.author.id) + ".json", "w") as f:
-        json.dump(profile, file, indent=4)
+        json.dump(profile, f, indent=4)
 
 
 async def giveCurrency(ctx, time: 0, seconds: 0, minutes: 0, hours: 0, cookies: 0):
@@ -141,7 +141,7 @@ async def weekly(ctx):
                 "LastRedeemedMonthly": data["LastRedeemedMonthly"]
             }
             with open("profiles/" + str(ctx.author.id) + ".json", "w") as f:
-                json.dump(profile, file, indent=4)
+                json.dump(profile, f, indent=4)
         await ctx.send("come back next week")
     else:
         await ctx.send("you cant do that yet")
@@ -156,7 +156,7 @@ async def monthly(ctx):
     with open("profiles/" + str(ctx.author.id) + ".json", 'r+') as f:
         data = json.load(f)
         if not data["LastRedeemedWeekly"] is None:
-            lastRedeemed = data["LastRedeemedMonthly”]
+            lastRedeemed = data["LastRedeemedMonthly"]
         else:
             hasNotRedeemedOnce = True
 
@@ -173,7 +173,7 @@ async def monthly(ctx):
                 "Hours": data["Hours"],
                 "Cookies": data["Cookies"],
                 "LastRedeemedDaily": data["LastRedeemedDaily"],
-                "LastRedeemedWeekly": data["LastRedeemedWeekly”],
+                "LastRedeemedWeekly": data["LastRedeemedWeekly"],
                 "LastRedeemedMonthly": int(time.time())
             }
             with open("profiles/" + str(ctx.author.id) + ".json", "w") as file:
@@ -182,4 +182,4 @@ async def monthly(ctx):
     else:
         await ctx.send("You cant do that yet!")
 
-bot.run('InsertBotToken')
+bot.run('NjU3MTQxNjAwMTgyNDY4NjA4.XgZdUA.l1o0zmT4FAr9HzM7IexQrMK8dnw')
