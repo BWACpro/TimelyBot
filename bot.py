@@ -42,7 +42,7 @@ async def giveCurrency(ctx, time: 0, seconds: 0, minutes: 0, hours: 0, cookies: 
             "LastRedeemedMonthly": data["LastRedeemedMonthly"]
         }
         with open("profiles/" + str(ctx.author.id) + ".json", "w") as f:
-            json.dump(profile, file, indent=4)
+            json.dump(profile, f, indent=4)
     gainEmbed = discord.Embed(title=ctx.author.name + " you gained:",
                          description="Time: " + str(time) + "\nSeconds: " + str(seconds) + "\nMinutes: " + str(minutes) + "\nHours: " + str(hours) + "\nCookies: " + str(cookies),
                          color=0xe8d01e)
@@ -105,7 +105,7 @@ async def daily(ctx):
                 "LastRedeemedMonthly": data["LastRedeemedMonthly"]
             }
             with open("profiles/" + str(ctx.author.id) + ".json", "w") as f:
-                json.dump(profile, file, indent=4)
+                json.dump(profile, f, indent=4)
         await ctx.send("come back tomorrow")
     else:
         await ctx.send("you cant do that yet")
@@ -176,8 +176,8 @@ async def monthly(ctx):
                 "LastRedeemedWeekly": data["LastRedeemedWeekly"],
                 "LastRedeemedMonthly": int(time.time())
             }
-            with open("profiles/" + str(ctx.author.id) + ".json", "w") as file:
-                json.dump(profile, file, indent=4)
+            with open("profiles/" + str(ctx.author.id) + ".json", "w") as f:
+                json.dump(profile, f, indent=4)
         await ctx.send("Come back next month!")
     else:
         await ctx.send("You cant do that yet!")
