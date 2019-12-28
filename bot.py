@@ -45,7 +45,7 @@ async def giveCurrency(ctx, time: 0, seconds: 0, minutes: 0, hours: 0, cookies: 
             json.dump(profile, f, indent=4)
     gainEmbed = discord.Embed(title=ctx.author.name + " you gained:",
                          description="Time: " + str(time) + "\nSeconds: " + str(seconds) + "\nMinutes: " + str(minutes) + "\nHours: " + str(hours) + "\nCookies: " + str(cookies),
-                         color=0xe8d01e)
+                         color=0xfeb647)
     await ctx.send(embed=gainEmbed)
 
 
@@ -71,7 +71,7 @@ async def bal(ctx):
 
     balEmbed = discord.Embed(title="Your balance:",
                          description="Time: " + str(profile["Time"]) + "\nSeconds: " + str(profile["Seconds"]) + "\nMinutes: " + str(profile["Minutes"]) + "\nHours: " + str(profile["Hours"]) + "\nCookies: " + str(profile["Cookies"]),
-                         color=0xe8d01e)
+                         color=0xfeb647)
     await ctx.send(embed=balEmbed)
 
 
