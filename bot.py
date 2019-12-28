@@ -105,10 +105,13 @@ async def daily(ctx):
                 "LastRedeemedMonthly": data["LastRedeemedMonthly"]
             }
             with open("profiles/" + str(ctx.author.id) + ".json", "w") as f:
-                json.dump(profile, f, indent=4)
-        await ctx.send("come back tomorrow")
+                json.dump(profile, file, indent=4)
+        dailyEmbed = discord.Embed(title=":calendar_spiral: Daily Redeem! :calendar_spiral:",
+                         description="You recieved:/n+75 time!",
+                         color=0x33FFFF)
+    	await ctx.send(embed=dailyEmbed)
     else:
-        await ctx.send("you cant do that yet")
+        await ctx.send("You cant do that yet!")
 
 
 @bot.command()
