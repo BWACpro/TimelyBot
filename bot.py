@@ -107,7 +107,7 @@ async def daily(ctx):
             with open("profiles/" + str(ctx.author.id) + ".json", "w") as f:
                 json.dump(profile, file, indent=4)
         dailyEmbed = discord.Embed(title=":calendar_spiral: Daily Redeem! :calendar_spiral:",description="You recieved:/n+75 time!",color=0x33FFFF)
-    	await ctx.send(embed=dailyEmbed)
+        await ctx.send(embed=dailyEmbed)
     else:
         await ctx.send("You cant do that yet!")
 
