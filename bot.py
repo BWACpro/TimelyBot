@@ -106,7 +106,7 @@ async def daily(ctx):
             }
             with open("profiles/" + str(ctx.author.id) + ".json", "w") as f:
                 json.dump(profile, file, indent=4)
-        dailyEmbed = discord.Embed(title=":calendar_spiral: Daily Redeem! :calendar_spiral:",description="You recieved:/n+75 time!",color=0x33FFFF)
+        dailyEmbed = discord.Embed(title=":calendar_spiral: Daily Redeem! :calendar_spiral:",description="You recieved: +75 time!",color=0x33FFFF)
         await ctx.send(embed=dailyEmbed)
     else:
         await ctx.send("You cant do that yet!")
@@ -143,7 +143,8 @@ async def weekly(ctx):
             }
             with open("profiles/" + str(ctx.author.id) + ".json", "w") as f:
                 json.dump(profile, f, indent=4)
-        await ctx.send("come back next week")
+        weeklyEmbed = discord.Embed(title=":calendar_spiral: Weekly Redeem! :calendar_spiral:",description="You recieved: +200 time!",color=0x33FF99)
+        await ctx.send(embed=weeklyEmbed)
     else:
         await ctx.send("you cant do that yet")
 
@@ -162,7 +163,7 @@ async def monthly(ctx):
             hasNotRedeemedOnce = True
 
     if lastRedeemed - time.time() > 18144000:
-        await giveCurrency(ctx, 750, 0, 0, 0, 0)
+        await giveCurrency(ctx, 725, 0, 0, 0, 0)
         with open("profiles/" + str(ctx.author.id) + ".json", 'r+') as f:
             data = json.load(f)
             profile = {
@@ -179,7 +180,8 @@ async def monthly(ctx):
             }
             with open("profiles/" + str(ctx.author.id) + ".json", "w") as f:
                 json.dump(profile, f, indent=4)
-        await ctx.send("Come back next month!")
+        monthlyEmbed = discord.Embed(title=":calendar_spiral: MONTHLY Redeem! :calendar_spiral:",description="You recieved: +725 time!",color=0x33FFFF)
+        await ctx.send(embed=monthlyEmbed)
     else:
         await ctx.send("You cant do that yet!")
 
