@@ -4,7 +4,7 @@ import json
 import os.path
 import time
 
-bot = commands.Bot(command_prefix=':')
+bot = commands.Bot(command_prefix=';')
 
 
 async def createProfile(ctx):
@@ -52,27 +52,65 @@ async def giveCurrency(ctx, time: 0, seconds: 0, minutes: 0, hours: 0, cookies: 
 @bot.command()
 async def bal(ctx):
     profile = None
-    if not os.path.isfile("profiles/" + str(ctx.author.id) + ".json"):
-        await createProfile(ctx)
-    with open("profiles/" + str(ctx.author.id) + ".json", 'r+') as f:
-        data = json.load(f)
-        profile = {
-            "Discord id": ctx.author.id,
-            "Discord name": ctx.author.name,
-            "Time": data["Time"],
-            "Seconds": data["Seconds"],
-            "Minutes": data["Minutes"],
-            "Hours": data["Hours"],
-            "Cookies": data["Cookies"],
-            "LastRedeemedDaily": data["LastRedeemedDaily"],
-            "LastRedeemedWeekly": data["LastRedeemedWeekly"],
-            "LastRedeemedMonthly": data["LastRedeemedMonthly"]
-        }
+    try:
+        mentioned = ctx.message.mentions[0]
+        if not os.path.isfile("profiles/" + str(ctx.message.mentions[0].id) + ".json"):
+            balEmbed = discord.Embed(title="That user doesnt have a balance",
+                                     description="ask them to do ;bal",
+                                     color=0xfeb647)
+            await ctx.send(embed=balEmbed)
+        else:
+            with open("profiles/" + str(ctx.message.mentions[0].id) + ".json", 'r+') as f:
+                data = json.load(f)
+                profile = {
+                    "Discord id": ctx.message.mentions[0].id,
+                    "Discord name": ctx.message.mentions[0].name,
+                    "Time": data["Time"],
+                    "Seconds": data["Seconds"],
+                    "Minutes": data["Minutes"],
+                    "Hours": data["Hours"],
+                    "Cookies": data["Cookies"],
+                    "LastRedeemedDaily": data["LastRedeemedDaily"],
+                    "LastRedeemedWeekly": data["LastRedeemedWeekly"],
+                    "LastRedeemedMonthly": data["LastRedeemedMonthly"]
+                    }
 
-    balEmbed = discord.Embed(title="Your balance:",
-                         description="Time: " + str(profile["Time"]) + "\nSeconds: " + str(profile["Seconds"]) + "\nMinutes: " + str(profile["Minutes"]) + "\nHours: " + str(profile["Hours"]) + "\nCookies: " + str(profile["Cookies"]),
-                         color=0xfeb647)
-    await ctx.send(embed=balEmbed)
+                balEmbed = discord.Embed(title=profile["Discord name"] + "'s balance:",
+                                         description="Time: " + str(profile["Time"]) + "\nSeconds: " + str(
+                                             profile["Seconds"]) + "\nMinutes: " + str(
+                                             profile["Minutes"]) + "\nHours: " + str(
+                                             profile["Hours"]) + "\nCookies: " + str(profile["Cookies"]),
+                                         color=0xfeb647)
+                await ctx.send(embed=balEmbed)
+    except IndexError:
+        if not os.path.isfile("profiles/" + str(ctx.author.id) + ".json"):
+            await createProfile(ctx)
+        with open("profiles/" + str(ctx.author.id) + ".json", 'r+') as f:
+            data = json.load(f)
+            profile = {
+                "Discord id": ctx.author.id,
+                "Discord name": ctx.author.name,
+                "Time": data["Time"],
+                "Seconds": data["Seconds"],
+                "Minutes": data["Minutes"],
+                "Hours": data["Hours"],
+                "Cookies": data["Cookies"],
+                "LastRedeemedDaily": data["LastRedeemedDaily"],
+                "LastRedeemedWeekly": data["LastRedeemedWeekly"],
+                "LastRedeemedMonthly": data["LastRedeemedMonthly"]
+            }
+
+        balEmbed = discord.Embed(title=profile["Discord name"] + "'s balance:",
+                                 description="Time: " + str(profile["Time"]) + "\nSeconds: " + str(
+                                     profile["Seconds"]) + "\nMinutes: " + str(profile["Minutes"]) + "\nHours: " + str(
+                                     profile["Hours"]) + "\nCookies: " + str(profile["Cookies"]),
+                                 color=0xfeb647)
+        await ctx.send(embed=balEmbed)
+
+
+# @bot.commant()
+# async def give(ctx):
+#
 
 
 @bot.command()
@@ -105,7 +143,7 @@ async def daily(ctx):
                 "LastRedeemedMonthly": data["LastRedeemedMonthly"]
             }
             with open("profiles/" + str(ctx.author.id) + ".json", "w") as f:
-                json.dump(profile, file, indent=4)
+                json.dump(profile, f, indent=4)
         dailyEmbed = discord.Embed(title=":calendar_spiral: Daily Redeem! :calendar_spiral:",description="You recieved: +75 time!",color=0x33FFFF)
         await ctx.send(embed=dailyEmbed)
     else:
@@ -185,4 +223,9 @@ async def monthly(ctx):
     else:
         await ctx.send("You cant do that yet!")
 
-bot.run('NjU3MTQxNjAwMTgyNDY4NjA4.XgZdUA.l1o0zmT4FAr9HzM7IexQrMK8dnw')
+
+@bot.event
+async def on_ready():
+    print('Ready!')
+
+bot.run('')
