@@ -180,7 +180,7 @@ async def monthly(ctx):
             }
             with open("profiles/" + str(ctx.author.id) + ".json", "w") as f:
                 json.dump(profile, f, indent=4)
-        monthlyEmbed = discord.Embed(title=":calendar_spiral: MONTHLY Redeem! :calendar_spiral:",description="You recieved: +725 time!",color=0x33FFFF)
+        monthlyEmbed = discord.Embed(title=":calendar_spiral: MONTHLY Redeem! :calendar_spiral:",description="You recieved: +725 time!",color=0x33FF00)
         await ctx.send(embed=monthlyEmbed)
     else:
         await ctx.send("You cant do that yet!")
