@@ -150,7 +150,7 @@ async def daily(ctx):
         await ctx.send(embed=dailyEmbed)
     else:
         dailyEmbed = discord.Embed(title="You can't do that yet!",
-                                   description="Try again later", color=0xB37C4a)
+                                   description="Try again later", color=0xFF5844)
         await ctx.send(embed=dailyEmbed)
 
 
@@ -189,7 +189,7 @@ async def weekly(ctx):
         await ctx.send(embed=weeklyEmbed)
     else:
         weeklyEmbed = discord.Embed(title="You can't do that yet!",
-                                   description="Try again later", color=0xB37C4a)
+                                   description="Try again later", color=0xFF5844)
         await ctx.send(embed=weeklyEmbed)
 
 
@@ -228,7 +228,7 @@ async def monthly(ctx):
         await ctx.send(embed=monthlyEmbed)
     else:
         monthlyEmbed = discord.Embed(title=ctx.author.mention + " You can't do that yet!",
-                                     description="Try again later", color=0xB37C4a)
+                                     description="Try again later", color=0xFF5844)
         await ctx.send(embed=monthlyEmbed)
 
 
