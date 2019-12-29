@@ -24,7 +24,7 @@ async def createProfile(ctx):
         json.dump(profile, f, indent=4)
 
 
-async def giveCurrency(ctx, time: 0, seconds: 0, minutes: 0, hours: 0, cookies: 0):
+async def giveCurrency(ctx, time: 0, seconds: 0, minutes: 0, hours: 0, cookies: 0, showmessage: False):
     if not os.path.isfile("profiles/" + str(ctx.author.id) + ".json"):
         await createProfile(ctx)
     with open("profiles/" + str(ctx.author.id) + ".json", 'r+') as f:
@@ -43,10 +43,11 @@ async def giveCurrency(ctx, time: 0, seconds: 0, minutes: 0, hours: 0, cookies: 
         }
         with open("profiles/" + str(ctx.author.id) + ".json", "w") as f:
             json.dump(profile, f, indent=4)
-    gainEmbed = discord.Embed(title=ctx.author.name + " you gained:",
-                         description="Time: " + str(time) + "\nSeconds: " + str(seconds) + "\nMinutes: " + str(minutes) + "\nHours: " + str(hours) + "\nCookies: " + str(cookies),
-                         color=0xfeb647)
-    await ctx.send(embed=gainEmbed)
+    if showmessage:
+        gainEmbed = discord.Embed(title=ctx.author.name + " you gained:",
+                             description="Time: " + str(time) + "\nSeconds: " + str(seconds) + "\nMinutes: " + str(minutes) + "\nHours: " + str(hours) + "\nCookies: " + str(cookies),
+                             color=0xfeb647)
+        await ctx.send(embed=gainEmbed)
 
 
 @bot.command()
@@ -127,7 +128,7 @@ async def daily(ctx):
             hasNotRedeemedOnce = True
 
     if lastRedeemed - time.time() > 86400:
-        await giveCurrency(ctx, 75, 0, 0, 0, 0)
+        await giveCurrency(ctx, 75, 0, 0, 0, 0, False)
         with open("profiles/" + str(ctx.author.id) + ".json", 'r+') as f:
             data = json.load(f)
             profile = {
@@ -144,10 +145,13 @@ async def daily(ctx):
             }
             with open("profiles/" + str(ctx.author.id) + ".json", "w") as f:
                 json.dump(profile, f, indent=4)
-        dailyEmbed = discord.Embed(title=":calendar_spiral: Daily Redeem! :calendar_spiral:",description="You recieved: +75 time!",color=0x33FFFF)
+        dailyEmbed = discord.Embed(title=":calendar_spiral: Daily Redeem! :calendar_spiral:",
+                                   description="You recieved: +75 time!",color=0x33FFFF)
         await ctx.send(embed=dailyEmbed)
     else:
-        await ctx.send("You cant do that yet!")
+        dailyEmbed = discord.Embed(title="you cant do that yet",
+                                   description="try again later", color=0x33FFFF)
+        await ctx.send(embed=dailyEmbed)
 
 
 @bot.command()
@@ -164,7 +168,7 @@ async def weekly(ctx):
             hasNotRedeemedOnce = True
 
     if lastRedeemed - time.time() > 604800:
-        await giveCurrency(ctx, 200, 0, 0, 0, 0)
+        await giveCurrency(ctx, 200, 0, 0, 0, 0, False)
         with open("profiles/" + str(ctx.author.id) + ".json", 'r+') as f:
             data = json.load(f)
             profile = {
@@ -184,7 +188,9 @@ async def weekly(ctx):
         weeklyEmbed = discord.Embed(title=":calendar_spiral: Weekly Redeem! :calendar_spiral:",description="You recieved: +200 time!",color=0x33FF99)
         await ctx.send(embed=weeklyEmbed)
     else:
-        await ctx.send("you cant do that yet")
+        weeklyEmbed = discord.Embed(title="you cant do that yet",
+                                   description="try again later", color=0x33FFFF)
+        await ctx.send(embed=weeklyEmbed)
 
 
 @bot.command()
@@ -201,7 +207,7 @@ async def monthly(ctx):
             hasNotRedeemedOnce = True
 
     if lastRedeemed - time.time() > 18144000:
-        await giveCurrency(ctx, 725, 0, 0, 0, 0)
+        await giveCurrency(ctx, 725, 0, 0, 0, 0, False)
         with open("profiles/" + str(ctx.author.id) + ".json", 'r+') as f:
             data = json.load(f)
             profile = {
@@ -221,7 +227,9 @@ async def monthly(ctx):
         monthlyEmbed = discord.Embed(title=":calendar_spiral: MONTHLY Redeem! :calendar_spiral:",description="You recieved: +725 time!",color=0x33FF00)
         await ctx.send(embed=monthlyEmbed)
     else:
-        await ctx.send("You cant do that yet!")
+        monthlyEmbed = discord.Embed(title=ctx.author.mention + " you cant do that yet",
+                                     description="try again later", color=0x33FFFF)
+        await ctx.send(embed=monthlyEmbed)
 
 
 @bot.event
