@@ -16,9 +16,9 @@ async def createProfile(ctx):
         "Minutes": 0,
         "Hours": 0,
         "Cookies": 0,
-        "LastRedeemedDaily": 99999999999999,
-        "LastRedeemedWeekly": 999999999999999,
-        "LastRedeemedMonthly": 99999999999999
+        "LastRedeemedDaily": 0,
+        "LastRedeemedWeekly": 0,
+        "LastRedeemedMonthly": 0
     }
     with open("profiles/" + str(ctx.author.id) + ".json", "w") as f:
         json.dump(profile, f, indent=4)
@@ -109,11 +109,6 @@ async def bal(ctx):
         await ctx.send(embed=balEmbed)
 
 
-# @bot.commant()
-# async def give(ctx):
-#
-
-
 @bot.command()
 async def daily(ctx):
     lastRedeemed = None
@@ -126,8 +121,9 @@ async def daily(ctx):
             lastRedeemed = data["LastRedeemedDaily"]
         else:
             hasNotRedeemedOnce = True
+    print(abs(lastRedeemed - time.time()))
 
-    if lastRedeemed - time.time() > 86400:
+    if abs(lastRedeemed - time.time()) > 86400:
         await giveCurrency(ctx, 75, 0, 0, 0, 0, False)
         with open("profiles/" + str(ctx.author.id) + ".json", 'r+') as f:
             data = json.load(f)
@@ -167,7 +163,7 @@ async def weekly(ctx):
         else:
             hasNotRedeemedOnce = True
 
-    if lastRedeemed - time.time() > 604800:
+    if abs(lastRedeemed - time.time()) > 604800:
         await giveCurrency(ctx, 200, 0, 0, 0, 0, False)
         with open("profiles/" + str(ctx.author.id) + ".json", 'r+') as f:
             data = json.load(f)
@@ -206,7 +202,7 @@ async def monthly(ctx):
         else:
             hasNotRedeemedOnce = True
 
-    if lastRedeemed - time.time() > 18144000:
+    if abs(lastRedeemed - time.time()) > 18144000:
         await giveCurrency(ctx, 725, 0, 0, 0, 0, False)
         with open("profiles/" + str(ctx.author.id) + ".json", 'r+') as f:
             data = json.load(f)
