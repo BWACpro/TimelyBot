@@ -145,8 +145,8 @@ async def daily(ctx):
                                    description="You recieved: +75 time!",color=0x33FFFF)
         await ctx.send(embed=dailyEmbed)
     else:
-        dailyEmbed = discord.Embed(title="you cant do that yet",
-                                   description="try again later", color=0x33FFFF)
+        dailyEmbed = discord.Embed(title="You can't do that yet!",
+                                   description="Try again later", color=0xFF5844)
         await ctx.send(embed=dailyEmbed)
 
 
@@ -184,8 +184,8 @@ async def weekly(ctx):
         weeklyEmbed = discord.Embed(title=":calendar_spiral: Weekly Redeem! :calendar_spiral:",description="You recieved: +200 time!",color=0x33FF99)
         await ctx.send(embed=weeklyEmbed)
     else:
-        weeklyEmbed = discord.Embed(title="you cant do that yet",
-                                   description="try again later", color=0x33FFFF)
+        weeklyEmbed = discord.Embed(title="You can't do that yet!",
+                                   description="Try again later", color=0xFF5844)
         await ctx.send(embed=weeklyEmbed)
 
 
@@ -223,8 +223,8 @@ async def monthly(ctx):
         monthlyEmbed = discord.Embed(title=":calendar_spiral: MONTHLY Redeem! :calendar_spiral:",description="You recieved: +725 time!",color=0x33FF00)
         await ctx.send(embed=monthlyEmbed)
     else:
-        monthlyEmbed = discord.Embed(title=ctx.author.mention + " you cant do that yet",
-                                     description="try again later", color=0x33FFFF)
+        monthlyEmbed = discord.Embed(title=ctx.author.mention + " You can't do that yet!",
+                                     description="Try again later", color=0xFF5844)
         await ctx.send(embed=monthlyEmbed)
 
 
