@@ -261,7 +261,20 @@ async def monthly(ctx):
         monthlyEmbed = discord.Embed(title=f"{ctx.author.name} you can't do that yet!",
                                      description="Try again later", color=0xFF5844)
         await ctx.send(embed=monthlyEmbed)
-
+        
+@bot.command()
+async def give(ctx, mention, item, giveamount)
+    with open("profiles/" + str(author.id) + ".json", 'r+') as f:
+        data = json.load(f)
+    with open("profiles/" + str(mentioned.id) + ".json", 'r+') as f:
+        data = json.load(f)
+	if data_author["Cookies"] > giveamount or data["cookies"] == giveamount:
+        if not os.path.isfile("profiles/" + str(ctx.author.id) + ".json"):
+            await createProfile(ctx)
+            if not os.path.isfile("profiles/" + str(ctx.mention.id) + ".json"):
+                await createProfile(ctx)
+	else:
+		print(f"you don't have enough {item}s")
 
 @bot.event
 async def on_ready():
