@@ -274,7 +274,7 @@ async def give(ctx, mention, item, giveamount)
             if not os.path.isfile("profiles/" + str(ctx.mention.id) + ".json"):
                 await createProfile(ctx)
 	else:
-		print(f"you don't have enough {item}s")
+		print(f"You don't have enough {item}s!")
 
 @bot.event
 async def on_ready():
